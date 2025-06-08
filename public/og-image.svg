@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e1b4b;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#581c87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#312e81;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  
+  <!-- Decorative stars -->
+  <circle cx="100" cy="100" r="2" fill="#a855f7" opacity="0.6"/>
+  <circle cx="1100" cy="150" r="3" fill="#3b82f6" opacity="0.4"/>
+  <circle cx="200" cy="500" r="2" fill="#8b5cf6" opacity="0.5"/>
+  <circle cx="1000" cy="450" r="2" fill="#6366f1" opacity="0.6"/>
+  <circle cx="150" cy="300" r="1.5" fill="#a855f7" opacity="0.7"/>
+  <circle cx="1050" cy="300" r="1.5" fill="#3b82f6" opacity="0.5"/>
+  
+  <!-- Main sparkles icon -->
+  <g transform="translate(150, 200)">
+    <path d="m60 15-9.56 29.065a10 10 0 0 1-6.375 6.375L15 60l29.065 9.56a10 10 0 0 1 6.375 6.375L60 105l9.56-29.065a10 10 0 0 1 6.375-6.375L105 60l-29.065-9.56a10 10 0 0 1-6.375-6.375L60 15Z" fill="url(#iconGrad)" stroke="url(#iconGrad)" stroke-width="2"/>
+    <path d="M25 15v20" stroke="url(#iconGrad)" stroke-width="3"/>
+    <path d="M95 85v20" stroke="url(#iconGrad)" stroke-width="3"/>
+    <path d="M15 25h20" stroke="url(#iconGrad)" stroke-width="3"/>
+    <path d="M85 95h20" stroke="url(#iconGrad)" stroke-width="3"/>
+  </g>
+  
+  <!-- Main title -->
+  <text x="400" y="280" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white">
+    zvezde365.com
+  </text>
+  
+  <!-- Tagline -->
+  <text x="400" y="340" font-family="Arial, sans-serif" font-size="32" fill="#c4b5fd">
+    Otkrijte svoju kosmičku sudbinu
+  </text>
+  
+  <!-- Description -->
+  <text x="400" y="420" font-family="Arial, sans-serif" font-size="24" fill="#e0e7ff">
+    Zavirite u tajne zvezda i otkrijte svoju jedinstvenu astrološku priču
+  </text>
+  
+  <!-- Additional decorative elements -->
+  <g transform="translate(950, 400)">
+    <path d="m30 7.5-4.78 14.533a5 5 0 0 1-3.187 3.187L7.5 30l14.533 4.78a5 5 0 0 1 3.187 3.187L30 52.5l4.78-14.533a5 5 0 0 1 3.187-3.187L52.5 30l-14.533-4.78a5 5 0 0 1-3.187-3.187L30 7.5Z" fill="url(#iconGrad)" opacity="0.6"/>
+  </g>
+  
+  <g transform="translate(850, 150)">
+    <path d="m20 5-3.19 9.69a3.33 3.33 0 0 1-2.12 2.12L5 20l9.69 3.19a3.33 3.33 0 0 1 2.12 2.12L20 35l3.19-9.69a3.33 3.33 0 0 1 2.12-2.12L35 20l-9.69-3.19a3.33 3.33 0 0 1-2.12-2.12L20 5Z" fill="url(#iconGrad)" opacity="0.4"/>
+  </g>
+</svg>
