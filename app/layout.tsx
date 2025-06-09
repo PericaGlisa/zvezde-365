@@ -177,10 +177,10 @@ export default function RootLayout({
                   </label>
                   
                   {/* Mobile Menu */}
-                  <div className="fixed inset-0 bg-gray-900/95 z-40 -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 ease-in-out overflow-y-auto" onClick={(e) => { if (e.target === e.currentTarget) document.getElementById('mobile-menu-toggle')!.checked = false; }}>
+                  <div className="fixed inset-0 bg-gray-900/95 z-40 -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 ease-in-out overflow-y-auto" onClick={(e) => { if (e.target === e.currentTarget) (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false; }}>
                     <div className="container px-4 sm:px-6 py-6 sm:py-8 mx-auto">
                       <div className="flex flex-col space-y-3 sm:space-y-4">
-                        <Link href="/" className="flex items-center justify-center mb-6 sm:mb-8" onClick={() => document.getElementById('mobile-menu-toggle')!.checked = false}>
+                        <Link href="/" className="flex items-center justify-center mb-6 sm:mb-8" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
                           <Sparkles size={28} className="text-purple-300 mr-2 sm:w-8 sm:h-8" />
                           <span className="text-xl sm:text-2xl font-bold">zvezde365.com</span>
                         </Link>
@@ -199,21 +199,21 @@ export default function RootLayout({
                             <div className="pl-3 sm:pl-5">
                               <h3 className="text-purple-300 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">Horoskop</h3>
                               <div className="space-y-3 sm:space-y-4">
-                                <Link href="/horoscope" className="block text-gray-300 hover:text-purple-300 transition-colors" onClick={() => document.getElementById('mobile-menu-toggle')!.checked = false}>
+                                <Link href="/horoscope" className="block text-gray-300 hover:text-purple-300 transition-colors" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
                                   <div className="font-medium flex items-center">
                                     <Sun className="h-4 w-4 mr-2 text-purple-400" />
                                     Dnevni, nedeljni i mesečni
                                   </div>
                                   <p className="text-gray-400 text-sm">Redovno ažurirane prognoze</p>
                                 </Link>
-                                <Link href="/lunar-phases" className="block text-gray-300 hover:text-purple-300 transition-colors" onClick={() => document.getElementById('mobile-menu-toggle')!.checked = false}>
+                                <Link href="/lunar-phases" className="block text-gray-300 hover:text-purple-300 transition-colors" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
                                   <div className="font-medium flex items-center">
                                     <Moon className="h-4 w-4 mr-2 text-purple-400" />
                                     Mesečeve faze
                                   </div>
                                   <p className="text-gray-400 text-sm">Uticaj meseca na vaš život</p>
                                 </Link>
-                                <Link href="/transit-calculator" className="block text-gray-300 hover:text-purple-300 transition-colors" onClick={() => document.getElementById('mobile-menu-toggle')!.checked = false}>
+                                <Link href="/transit-calculator" className="block text-gray-300 hover:text-purple-300 transition-colors" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
                                   <div className="font-medium flex items-center">
                                     <Calendar className="h-4 w-4 mr-2 text-purple-400" />
                                     Kalkulator tranzita
@@ -227,21 +227,21 @@ export default function RootLayout({
                             <div className="pl-3 sm:pl-5">
                               <h3 className="text-purple-300 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">Izveštaji</h3>
                               <div className="space-y-3 sm:space-y-4">
-                                <Link href="/natal-chart" className="block text-gray-300 hover:text-purple-300 transition-colors" onClick={() => document.getElementById('mobile-menu-toggle')!.checked = false}>
+                                <Link href="/natal-chart" className="block text-gray-300 hover:text-purple-300 transition-colors" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
                                   <div className="font-medium flex items-center">
                                     <Star className="h-4 w-4 mr-2 text-purple-400" />
                                     Natalna karta
                                   </div>
                                   <p className="text-gray-400 text-sm">Detaljna analiza vašeg rođenja</p>
                                 </Link>
-                                <Link href="/compatibility" className="block text-gray-300 hover:text-purple-300 transition-colors" onClick={() => document.getElementById('mobile-menu-toggle')!.checked = false}>
+                                <Link href="/compatibility" className="block text-gray-300 hover:text-purple-300 transition-colors" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
                                   <div className="font-medium flex items-center">
                                     <Heart className="h-4 w-4 mr-2 text-purple-400" />
                                     Kompatibilnost
                                   </div>
                                   <p className="text-gray-400 text-sm">Astrološko poređenje odnosa</p>
                                 </Link>
-                                <Link href="/reports" className="block text-gray-300 hover:text-purple-300 transition-colors" onClick={() => document.getElementById('mobile-menu-toggle')!.checked = false}>
+                                <Link href="/reports" className="block text-gray-300 hover:text-purple-300 transition-colors" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
                                   <div className="font-medium flex items-center">
                                     <FileText className="h-4 w-4 mr-2 text-purple-400" />
                                     Astrološki izveštaji
@@ -255,7 +255,7 @@ export default function RootLayout({
                             <div className="pl-3 sm:pl-5">
                               <h3 className="text-purple-300 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">Alatke</h3>
                               <div className="space-y-3 sm:space-y-4">
-                                <Link href="/affirmations" className="block text-gray-300 hover:text-purple-300 transition-colors" onClick={() => document.getElementById('mobile-menu-toggle')!.checked = false}>
+                                <Link href="/affirmations" className="block text-gray-300 hover:text-purple-300 transition-colors" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
                                   <div className="font-medium flex items-center">
                                     <Feather className="h-4 w-4 mr-2 text-purple-400" />
                                     Astrološke afirmacije
@@ -267,7 +267,7 @@ export default function RootLayout({
                           </div>
                         </details>
                         
-                        <Link href="/contact" className="flex items-center p-3 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors" onClick={() => document.getElementById('mobile-menu-toggle')!.checked = false}>
+                        <Link href="/contact" className="flex items-center p-3 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
                           <MessageSquare className="mr-2 h-5 w-5 text-purple-400" />
                           <span className="font-medium">Kontakt</span>
                         </Link>
@@ -276,20 +276,20 @@ export default function RootLayout({
                         <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-700">
                           <h3 className="text-xs sm:text-sm uppercase text-gray-400 mb-2 sm:mb-3">Brzi linkovi</h3>
                           <div className="grid grid-cols-2 gap-2">
-                            <Link href="/" className="px-2 sm:px-3 py-2 bg-gray-800/50 rounded hover:bg-gray-700 transition-colors flex items-center text-sm" onClick={() => document.getElementById('mobile-menu-toggle')!.checked = false}>
+                            <Link href="/" className="px-2 sm:px-3 py-2 bg-gray-800/50 rounded hover:bg-gray-700 transition-colors flex items-center text-sm" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
                               <Sparkles className="mr-1 h-3 w-3 sm:h-4 sm:w-4 text-purple-400" />
                               <span>Početna</span>
                             </Link>
-                            <Link href="/natal-chart" className="px-2 sm:px-3 py-2 bg-gray-800/50 rounded hover:bg-gray-700 transition-colors flex items-center text-sm" onClick={() => document.getElementById('mobile-menu-toggle')!.checked = false}>
+                            <Link href="/natal-chart" className="px-2 sm:px-3 py-2 bg-gray-800/50 rounded hover:bg-gray-700 transition-colors flex items-center text-sm" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
                               <Star className="mr-1 h-3 w-3 sm:h-4 sm:w-4 text-purple-400" />
                               <span className="hidden xs:inline">Natalna karta</span>
                               <span className="xs:hidden">Karta</span>
                             </Link>
-                            <Link href="/horoscope" className="px-2 sm:px-3 py-2 bg-gray-800/50 rounded hover:bg-gray-700 transition-colors flex items-center text-sm" onClick={() => document.getElementById('mobile-menu-toggle')!.checked = false}>
+                            <Link href="/horoscope" className="px-2 sm:px-3 py-2 bg-gray-800/50 rounded hover:bg-gray-700 transition-colors flex items-center text-sm" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
                               <Sun className="mr-1 h-3 w-3 sm:h-4 sm:w-4 text-yellow-400" />
                               <span>Horoskop</span>
                             </Link>
-                            <Link href="/compatibility" className="px-2 sm:px-3 py-2 bg-gray-800/50 rounded hover:bg-gray-700 transition-colors flex items-center text-sm" onClick={() => document.getElementById('mobile-menu-toggle')!.checked = false}>
+                            <Link href="/compatibility" className="px-2 sm:px-3 py-2 bg-gray-800/50 rounded hover:bg-gray-700 transition-colors flex items-center text-sm" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
                               <Heart className="mr-1 h-3 w-3 sm:h-4 sm:w-4 text-pink-400" />
                               <span className="hidden xs:inline">Kompatibilnost</span>
                               <span className="xs:hidden">Ljubav</span>
