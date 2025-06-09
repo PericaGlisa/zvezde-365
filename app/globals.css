@@ -11,6 +11,14 @@
   display: block;
 }
 
+/* Prevent body scroll when mobile menu is open */
+#mobile-menu-toggle:checked ~ * body,
+body:has(#mobile-menu-toggle:checked) {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

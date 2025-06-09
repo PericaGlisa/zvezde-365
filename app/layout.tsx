@@ -180,7 +180,7 @@ export default function RootLayout({
                   <div className="fixed inset-0 bg-gray-900/95 z-40 -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 ease-in-out overflow-y-auto" onClick={(e) => { if (e.target === e.currentTarget) (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false; }}>
                     <div className="container px-4 sm:px-6 py-6 sm:py-8 mx-auto">
                       <div className="flex flex-col space-y-3 sm:space-y-4">
-                        <Link href="/" className="flex items-center justify-center mb-6 sm:mb-8" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
+                        <Link href="/" className="flex items-center justify-center mb-12 sm:mb-16" onClick={() => (document.getElementById('mobile-menu-toggle') as HTMLInputElement)!.checked = false}>
                           <Sparkles size={28} className="text-purple-300 mr-2 sm:w-8 sm:h-8" />
                           <span className="text-xl sm:text-2xl font-bold">zvezde365.com</span>
                         </Link>
@@ -429,8 +429,8 @@ export default function RootLayout({
             
             {/* Bottom Footer */}
             <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-gray-400 text-xs sm:text-sm">
-              <p className="text-center sm:text-left">© 2025 zvezde365.com. Sva prava zadržana.</p>
-              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 mt-3 sm:mt-0">
+              <p className="text-center sm:text-left order-2 sm:order-1 mt-3 sm:mt-0">© 2025 zvezde365.com. Sva prava zadržana.</p>
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 order-1 sm:order-2">
                 <Link href="/privacy-policy" className="hover:text-purple-300 transition-colors text-center sm:text-left">Politika privatnosti</Link>
                 <Link href="/terms" className="hover:text-purple-300 transition-colors text-center sm:text-left">Uslovi korišćenja</Link>
                 <Link href="/contact" className="hover:text-purple-300 transition-colors text-center sm:text-left">Kontakt</Link>
