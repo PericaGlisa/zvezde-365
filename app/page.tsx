@@ -194,12 +194,12 @@ export default function Home() {
               </Link>
             </div>
             
-            {/* Service Card 5 - Tranzit kalkulator */}
+            {/* Service Card 5 - Kalkulator tranzita */}
             <div className="bg-gray-800 bg-opacity-50 rounded-xl p-6 sm:p-8 transform transition duration-300 hover:scale-105 backdrop-blur-sm border border-purple-500/20">
               <div className="bg-purple-600 rounded-full w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mb-4 sm:mb-6">
                 <Calendar className="h-6 w-6 sm:h-8 sm:w-8" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Tranzit kalkulator</h3>
+              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Kalkulator tranzita</h3>
               <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base">
                 Izračunajte kako planetarni tranziti utiču na vašu natalnu kartu i dobijte uvid u trenutne astrološke uticaje.
               </p>

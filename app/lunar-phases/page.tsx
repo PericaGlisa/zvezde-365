@@ -8,6 +8,7 @@ import { sr } from 'date-fns/locale';
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import { Input } from "@/components/ui/input";
 import {
   Card,
   CardContent,
@@ -31,6 +32,15 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 import { calculateMoonPhase, moonPhases, generateAffirmation } from '@/lib/astrology-utils';
 import { cn } from "@/lib/utils";
@@ -183,30 +193,51 @@ export default function LunarPhasesPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-4 sm:p-6">
-                <div className="flex flex-col md:flex-row gap-4 items-start">
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          "w-full md:w-auto justify-start text-left font-normal bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11",
-                          !selectedDate && "text-muted-foreground"
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-                        {selectedDate ? formatYugoslavDate(selectedDate) : "Izaberite datum"}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0 bg-gray-700 border-gray-600">
-                      <Calendar
-                        mode="single"
-                        selected={selectedDate}
-                        onSelect={(date) => date && setSelectedDate(date)}
-                        initialFocus
-                        className="bg-gray-700 text-white"
-                      />
-                    </PopoverContent>
-                  </Popover>
+                <div className="space-y-4">
+                  <div className="flex gap-2">
+                    <Input
+                      type="text"
+                      placeholder="DD.MM.YYYY"
+                      value={selectedDate ? formatYugoslavDate(selectedDate) : ""}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        // Parse DD.MM.YYYY format
+                        const dateRegex = /^(\d{1,2})\.(\d{1,2})\.(\d{4})\.?$/;
+                        const match = value.match(dateRegex);
+                        if (match) {
+                          const [, day, month, year] = match;
+                          const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+                          if (!isNaN(date.getTime())) {
+                            setSelectedDate(date);
+                          }
+                        }
+                      }}
+                      className="bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11 flex-1"
+                    />
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          className="bg-gray-700 border-gray-600 text-white h-10 sm:h-11 px-3"
+                        >
+                          <CalendarIcon className="h-4 w-4" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0 bg-gray-700 border-gray-600">
+                        <Calendar
+                          mode="single"
+                          selected={selectedDate}
+                          onSelect={(date) => date && setSelectedDate(date)}
+                          initialFocus
+                          className="bg-gray-700 text-white"
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                  <div className="text-xs sm:text-sm text-gray-400">
+                    Unesite datum u formatu DD.MM.YYYY ili koristite kalendar
+                  </div>
                   <div className="text-xs sm:text-sm text-gray-400 flex items-center">
                     <Clock className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                     <span>

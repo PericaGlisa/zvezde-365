@@ -348,40 +348,52 @@ export default function TransitCalculatorPage() {
                       render={({ field }) => (
                         <FormItem className="flex flex-col">
                           <FormLabel className="text-white text-sm sm:text-base">Vaš datum rođenja</FormLabel>
-                          <Popover>
-                            <PopoverTrigger asChild>
-                              <FormControl>
-                                <Button
-                                  variant={"outline"}
-                                  className={cn(
-                                    "pl-3 text-left font-normal bg-gray-700 border-gray-600 text-white h-10 sm:h-11 text-sm sm:text-base",
-                                    !field.value && "text-gray-400"
-                                  )}
-                                >
-                                  {field.value ? (
-                                    formatYugoslavDate(field.value)
-                                  ) : (
-                                    <span>Izaberite datum</span>
-                                  )}
-                                  <CalendarIcon className="ml-auto h-3 w-3 sm:h-4 sm:w-4 opacity-50" />
-                                </Button>
-                              </FormControl>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-auto p-0 bg-gray-700 border-gray-600" align="start">
-                              <CalendarComponent
-                                mode="single"
-                                selected={field.value}
-                                onSelect={field.onChange}
-                                disabled={(date) =>
-                                  date > new Date() || date < new Date("1900-01-01")
+                          <div className="flex gap-2">
+                            <Input
+                              type="text"
+                              placeholder="DD.MM.YYYY"
+                              value={field.value ? formatYugoslavDate(field.value) : ""}
+                              onChange={(e) => {
+                                const value = e.target.value;
+                                // Parse DD.MM.YYYY format
+                                const dateRegex = /^(\d{1,2})\.(\d{1,2})\.(\d{4})\.?$/;
+                                const match = value.match(dateRegex);
+                                if (match) {
+                                  const [, day, month, year] = match;
+                                  const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+                                  if (!isNaN(date.getTime()) && date >= new Date("1900-01-01") && date <= new Date()) {
+                                    field.onChange(date);
+                                  }
                                 }
-                                initialFocus
-                                className="bg-gray-700 text-white"
-                              />
-                            </PopoverContent>
-                          </Popover>
+                              }}
+                              className="bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11 flex-1"
+                            />
+                            <Popover>
+                              <PopoverTrigger asChild>
+                                <Button
+                                  type="button"
+                                  variant={"outline"}
+                                  className="bg-gray-700 border-gray-600 text-white h-10 sm:h-11 px-3"
+                                >
+                                  <CalendarIcon className="h-4 w-4" />
+                                </Button>
+                              </PopoverTrigger>
+                              <PopoverContent className="w-auto p-0 bg-gray-700 border-gray-600" align="start">
+                                <CalendarComponent
+                                  mode="single"
+                                  selected={field.value}
+                                  onSelect={field.onChange}
+                                  disabled={(date) =>
+                                    date > new Date() || date < new Date("1900-01-01")
+                                  }
+                                  initialFocus
+                                  className="bg-gray-700 text-white"
+                                />
+                              </PopoverContent>
+                            </Popover>
+                          </div>
                           <FormDescription className="text-gray-400 text-xs sm:text-sm">
-                            Datum za koji je izračunata vaša natalna karta.
+                            Unesite datum u formatu DD.MM.YYYY ili koristite kalendar
                           </FormDescription>
                           <FormMessage />
                         </FormItem>
