@@ -587,14 +587,14 @@ export default function ReportsPage() {
                                       className="border-gray-500 data-[state=checked]:bg-pink-600 data-[state=checked]:border-pink-600"
                                     />
                                     <div className="flex-1">
-                                      <div className="flex items-center justify-between mb-1">
+                                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0 mb-1">
                                         <label
                                           htmlFor={`report-${report.id}`}
                                           className="text-base font-medium text-white leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                         >
                                           {report.name}
                                         </label>
-                                        <span className="font-bold text-pink-400 ml-4">{report.price} RSD</span>
+                                        <span className="font-bold text-pink-400 sm:ml-4">{report.price} RSD</span>
                                       </div>
                                       <p className="text-sm text-gray-400">
                                         {report.description}

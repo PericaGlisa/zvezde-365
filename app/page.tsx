@@ -180,62 +180,62 @@ export default function Home() {
             </div>
             
             {/* Service Card 4 - Mesečeve faze */}
-            <div className="bg-gray-800 bg-opacity-50 rounded-xl p-8 transform transition duration-300 hover:scale-105 backdrop-blur-sm border border-purple-500/20">
-              <div className="bg-purple-600 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                <Moon size={32} />
+            <div className="bg-gray-800 bg-opacity-50 rounded-xl p-6 sm:p-8 transform transition duration-300 hover:scale-105 backdrop-blur-sm border border-purple-500/20">
+              <div className="bg-purple-600 rounded-full w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mb-4 sm:mb-6">
+                <Moon className="h-6 w-6 sm:h-8 sm:w-8" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Mesečeve faze</h3>
-              <p className="text-gray-300 mb-6">
+              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Mesečeve faze</h3>
+              <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base">
                 Otkrijte kako trenutna faza Meseca utiče na vas i vaše planove, kao i najbolje vreme za različite aktivnosti.
               </p>
-              <Link href="/lunar-phases" className="text-purple-400 hover:text-purple-300 inline-flex items-center">
+              <Link href="/lunar-phases" className="text-purple-400 hover:text-purple-300 inline-flex items-center text-sm sm:text-base">
                 <span>Istražite faze</span>
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Link>
             </div>
             
             {/* Service Card 5 - Tranzit kalkulator */}
-            <div className="bg-gray-800 bg-opacity-50 rounded-xl p-8 transform transition duration-300 hover:scale-105 backdrop-blur-sm border border-purple-500/20">
-              <div className="bg-purple-600 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                <Calendar size={32} />
+            <div className="bg-gray-800 bg-opacity-50 rounded-xl p-6 sm:p-8 transform transition duration-300 hover:scale-105 backdrop-blur-sm border border-purple-500/20">
+              <div className="bg-purple-600 rounded-full w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mb-4 sm:mb-6">
+                <Calendar className="h-6 w-6 sm:h-8 sm:w-8" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Tranzit kalkulator</h3>
-              <p className="text-gray-300 mb-6">
+              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Tranzit kalkulator</h3>
+              <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base">
                 Izračunajte kako planetarni tranziti utiču na vašu natalnu kartu i dobijte uvid u trenutne astrološke uticaje.
               </p>
-              <Link href="/transit-calculator" className="text-purple-400 hover:text-purple-300 inline-flex items-center">
+              <Link href="/transit-calculator" className="text-purple-400 hover:text-purple-300 inline-flex items-center text-sm sm:text-base">
                 <span>Izračunaj tranzite</span>
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Link>
             </div>
             
             {/* Service Card 6 - Afirmacije */}
-            <div className="bg-gray-800 bg-opacity-50 rounded-xl p-8 transform transition duration-300 hover:scale-105 backdrop-blur-sm border border-purple-500/20">
-              <div className="bg-purple-600 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                <Feather size={32} />
+            <div className="bg-gray-800 bg-opacity-50 rounded-xl p-6 sm:p-8 transform transition duration-300 hover:scale-105 backdrop-blur-sm border border-purple-500/20">
+              <div className="bg-purple-600 rounded-full w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mb-4 sm:mb-6">
+                <Feather className="h-6 w-6 sm:h-8 sm:w-8" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Astrološke afirmacije</h3>
-              <p className="text-gray-300 mb-6">
+              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Astrološke afirmacije</h3>
+              <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base">
                 Personalizovane astrološke afirmacije zasnovane na vašem zodijačkom znaku i trenutnoj fazi Meseca.
               </p>
-              <Link href="/affirmations" className="text-purple-400 hover:text-purple-300 inline-flex items-center">
+              <Link href="/affirmations" className="text-purple-400 hover:text-purple-300 inline-flex items-center text-sm sm:text-base">
                 <span>Generiši afirmacije</span>
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Link>
             </div>
             
             {/* Service Card 7 - Izveštaji */}
-            <div className="bg-gray-800 bg-opacity-50 rounded-xl p-8 transform transition duration-300 hover:scale-105 backdrop-blur-sm border border-purple-500/20">
-              <div className="bg-purple-600 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                <FileText size={32} />
+            <div className="bg-gray-800 bg-opacity-50 rounded-xl p-6 sm:p-8 transform transition duration-300 hover:scale-105 backdrop-blur-sm border border-purple-500/20">
+              <div className="bg-purple-600 rounded-full w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center mb-4 sm:mb-6">
+                <FileText className="h-6 w-6 sm:h-8 sm:w-8" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">Astrološki izveštaji</h3>
-              <p className="text-gray-300 mb-6">
+              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Astrološki izveštaji</h3>
+              <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base">
                 Detaljni personalizovani astrološki izveštaji koji pokrivaju različite aspekte vašeg života, karijere i odnosa.
               </p>
-              <Link href="/reports" className="text-purple-400 hover:text-purple-300 inline-flex items-center">
+              <Link href="/reports" className="text-purple-400 hover:text-purple-300 inline-flex items-center text-sm sm:text-base">
                 <span>Naručite izveštaj</span>
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Link>
             </div>
           </div>

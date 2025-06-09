@@ -198,7 +198,7 @@ export default function ContactPage() {
                   value="consultation" 
                   className="text-gray-300 data-[state=active]:text-purple-400 data-[state=active]:bg-gray-800 text-sm sm:text-base"
                 >
-                  Zakazivanje konsultacije
+                  Konsultacije
                 </TabsTrigger>
               </TabsList>
               
@@ -537,7 +537,7 @@ export default function ContactPage() {
                       <div className="space-y-4 w-full">
                         {consultationTypes.map(type => (
                           <div key={type.id} className="bg-gray-700/50 p-4 rounded-lg w-full border border-gray-600/50">
-                            <div className="flex justify-between items-center">
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0">
                               <h4 className="font-medium text-white">{type.name}</h4>
                               <span className="text-purple-400 font-semibold">{type.price}</span>
                             </div>

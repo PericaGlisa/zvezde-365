@@ -324,7 +324,7 @@ export default function LunarPhasesPage() {
             {/* Moon Phase Calendar for Current Month */}
             <Card className="bg-gray-800 border border-purple-500/30 text-white shadow-xl">
               <CardHeader>
-                <CardTitle className="flex items-center">
+                <CardTitle className="flex items-center text-lg sm:text-xl md:text-2xl">
                   <CalendarIcon className="mr-2 h-6 w-6 text-blue-400" />
                   Kalendar Mesečevih mena
                 </CardTitle>
@@ -387,16 +387,16 @@ export default function LunarPhasesPage() {
                   </div>
                 </div>
               </CardContent>
-              <CardFooter className="border-t border-gray-700 pt-4 flex justify-between">
+              <CardFooter className="border-t border-gray-700 pt-4 flex flex-col sm:flex-row gap-3 sm:gap-0 sm:justify-between">
                 <Button 
                   variant="outline" 
-                  className="bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11"
+                  className="bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11 w-full sm:w-auto"
                   onClick={() => setIsModalOpen(true)}
                 >
                   Više o Mesečevim fazama
                 </Button>
-                <Link href="/transit-calculator">
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-sm sm:text-base h-10 sm:h-11">
+                <Link href="/transit-calculator" className="w-full sm:w-auto">
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-sm sm:text-base h-10 sm:h-11 w-full sm:w-auto">
                     Izračunajte tranzite
                   </Button>
                 </Link>
@@ -406,7 +406,7 @@ export default function LunarPhasesPage() {
             {/* How Moon Phases Affect You */}
             <Card className="bg-gray-800 border border-purple-500/30 text-white shadow-xl">
               <CardHeader>
-                <CardTitle>Kako Mesečeve faze utiču na vas</CardTitle>
+                <CardTitle className="text-lg sm:text-xl md:text-2xl">Kako Mesečeve faze utiču na vas</CardTitle>
                 <CardDescription className="text-gray-300">
                   Razumevanje uticaja Mesečevih faza na različite aspekte života
                 </CardDescription>
@@ -464,16 +464,16 @@ export default function LunarPhasesPage() {
                   </ul>
                 </div>
               </CardContent>
-              <CardFooter className="border-t border-gray-700 pt-4 flex justify-between">
+              <CardFooter className="border-t border-gray-700 pt-4 flex flex-col sm:flex-row gap-3 sm:gap-0 sm:justify-between">
                 <Button 
                   variant="outline" 
-                  className="bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11"
+                  className="bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11 w-full sm:w-auto"
                   onClick={() => setIsModalOpen(true)}
                 >
                   Više o Mesečevim fazama
                 </Button>
-                <Link href="/transit-calculator">
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-sm sm:text-base h-10 sm:h-11">
+                <Link href="/transit-calculator" className="w-full sm:w-auto">
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-sm sm:text-base h-10 sm:h-11 w-full sm:w-auto">
                     Izračunajte tranzite
                   </Button>
                 </Link>
@@ -507,7 +507,7 @@ export default function LunarPhasesPage() {
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="bg-gray-800 text-white border border-purple-500/30 max-w-4xl max-h-[85vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-2xl flex items-center gap-2 text-white">
+            <DialogTitle className="text-lg sm:text-xl md:text-2xl flex items-center gap-2 text-white">
               <Moon className="h-6 w-6 text-blue-400" />
               <span>Sve o Mesečevim fazama i njihovom astrološkom značaju</span>
             </DialogTitle>
@@ -518,7 +518,7 @@ export default function LunarPhasesPage() {
           
           <div className="space-y-6 my-6">
             <div className="bg-gray-700/50 p-6 rounded-xl">
-              <h3 className="text-xl font-semibold mb-4 text-blue-400">Zašto su Mesečeve faze važne?</h3>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-4 text-blue-400">Zašto su Mesečeve faze važne?</h3>
               <p className="text-gray-300 mb-4">
                 Mesec je najbliže nebesko telo Zemlji, i njegova gravitaciona sila direktno utiče na okeane, 
                 vodena tela, pa čak i na ljudsko ponašanje i emocije. U astrologiji, Mesec predstavlja našu 
@@ -532,7 +532,7 @@ export default function LunarPhasesPage() {
             </div>
             
             <div>
-              <h3 className="text-xl font-semibold mb-4 text-white">Detaljno objašnjenje svake faze</h3>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-4 text-white">Detaljno objašnjenje svake faze</h3>
               <div className="space-y-8">
                 {/* New Moon */}
                 <div className="bg-gray-700/50 p-5 rounded-lg border-l-4 border-gray-500">
@@ -818,7 +818,7 @@ export default function LunarPhasesPage() {
             </div>
             
             <div className="bg-gray-700/50 p-6 rounded-lg border border-blue-500/30">
-              <h3 className="text-xl font-semibold mb-4 text-blue-400">Praktično korišćenje Mesečevih faza u svakodnevnom životu</h3>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-4 text-blue-400">Praktično korišćenje Mesečevih faza u svakodnevnom životu</h3>
               <div className="space-y-4">
                 <div>
                   <h4 className="font-medium text-white mb-2">Planiranje aktivnosti prema fazama</h4>

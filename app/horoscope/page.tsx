@@ -243,51 +243,51 @@ export default function HoroscopePage() {
             
             {/* Category Selection */}
             <div className="mb-8">
-              <label className="block text-sm sm:text-base font-medium text-gray-300 mb-2">Kategorija</label>
-              <div className="grid grid-cols-4 gap-2">
+              <label className="block text-sm sm:text-base font-medium text-gray-300 mb-3 sm:mb-4">Kategorija</label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-2">
                 <Button 
                   variant={category === 'general' ? 'default' : 'outline'} 
                   onClick={() => setCategory('general')}
                   className={category === 'general' 
-                    ? 'bg-white hover:bg-gray-200 text-gray-900 border-white h-10 sm:h-11' 
-                    : 'bg-gray-700 border-gray-600 text-gray-300 h-10 sm:h-11'}
+                    ? 'bg-white hover:bg-gray-200 text-gray-900 border-white h-12 sm:h-11 flex flex-col sm:flex-row items-center justify-center px-2 sm:px-4' 
+                    : 'bg-gray-700 border-gray-600 text-gray-300 h-12 sm:h-11 flex flex-col sm:flex-row items-center justify-center px-2 sm:px-4'}
                   disabled={isLoading}
                 >
-                  <Star className="mr-2 h-4 w-4" />
-                  Opšti
+                  <Star className="h-5 w-5 sm:h-4 sm:w-4 mb-1 sm:mb-0 sm:mr-2" />
+                  <span className="text-xs sm:text-sm">Opšti</span>
                 </Button>
                 <Button 
                   variant={category === 'love' ? 'default' : 'outline'} 
                   onClick={() => setCategory('love')}
                   className={category === 'love' 
-                    ? 'bg-pink-600 hover:bg-pink-700 text-white border-pink-500 h-10 sm:h-11' 
-                    : 'bg-gray-700 border-gray-600 text-gray-300 h-10 sm:h-11'}
+                    ? 'bg-pink-600 hover:bg-pink-700 text-white border-pink-500 h-12 sm:h-11 flex flex-col sm:flex-row items-center justify-center px-2 sm:px-4' 
+                    : 'bg-gray-700 border-gray-600 text-gray-300 h-12 sm:h-11 flex flex-col sm:flex-row items-center justify-center px-2 sm:px-4'}
                   disabled={isLoading}
                 >
-                  <Heart className="mr-2 h-4 w-4" />
-                  Ljubav
+                  <Heart className="h-5 w-5 sm:h-4 sm:w-4 mb-1 sm:mb-0 sm:mr-2" />
+                  <span className="text-xs sm:text-sm">Ljubav</span>
                 </Button>
                 <Button 
                   variant={category === 'health' ? 'default' : 'outline'} 
                   onClick={() => setCategory('health')}
                   className={category === 'health' 
-                    ? 'bg-green-600 hover:bg-green-700 text-white border-green-500 h-10 sm:h-11' 
-                    : 'bg-gray-700 border-gray-600 text-gray-300 h-10 sm:h-11'}
+                    ? 'bg-green-600 hover:bg-green-700 text-white border-green-500 h-12 sm:h-11 flex flex-col sm:flex-row items-center justify-center px-2 sm:px-4' 
+                    : 'bg-gray-700 border-gray-600 text-gray-300 h-12 sm:h-11 flex flex-col sm:flex-row items-center justify-center px-2 sm:px-4'}
                   disabled={isLoading}
                 >
-                  <RefreshCw className="mr-2 h-4 w-4" />
-                  Zdravlje
+                  <RefreshCw className="h-5 w-5 sm:h-4 sm:w-4 mb-1 sm:mb-0 sm:mr-2" />
+                  <span className="text-xs sm:text-sm">Zdravlje</span>
                 </Button>
                 <Button 
                   variant={category === 'career' ? 'default' : 'outline'} 
                   onClick={() => setCategory('career')}
                   className={category === 'career' 
-                    ? 'bg-blue-600 hover:bg-blue-700 text-white border-blue-500 h-10 sm:h-11' 
-                    : 'bg-gray-700 border-gray-600 text-gray-300 h-10 sm:h-11'}
+                    ? 'bg-blue-600 hover:bg-blue-700 text-white border-blue-500 h-12 sm:h-11 flex flex-col sm:flex-row items-center justify-center px-2 sm:px-4' 
+                    : 'bg-gray-700 border-gray-600 text-gray-300 h-12 sm:h-11 flex flex-col sm:flex-row items-center justify-center px-2 sm:px-4'}
                   disabled={isLoading}
                 >
-                  <CalendarDays className="mr-2 h-4 w-4" />
-                  Karijera
+                  <CalendarDays className="h-5 w-5 sm:h-4 sm:w-4 mb-1 sm:mb-0 sm:mr-2" />
+                  <span className="text-xs sm:text-sm">Karijera</span>
                 </Button>
               </div>
             </div>
@@ -453,7 +453,7 @@ export default function HoroscopePage() {
           
           {/* Features */}
           <div className="bg-gray-800 bg-opacity-50 rounded-xl p-8 backdrop-blur-sm border border-purple-500/20 mb-12">
-            <h2 className="text-2xl font-bold text-white text-center mb-8">Više od horoskopa</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-white text-center mb-6 sm:mb-8">Više od horoskopa</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-gray-900 p-6 rounded-lg flex flex-col h-full">
                 <div className="flex justify-center mb-4">
