@@ -410,17 +410,17 @@ export default function RootLayout({
                   <MessageSquare className="mr-2 h-4 w-4 text-purple-400" />
                   Kontakt
                 </h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-start">
-                    <Mail className="h-5 w-5 mr-2 text-purple-400 flex-shrink-0 mt-0.5" />
+                <ul className="space-y-2 text-gray-300">
+                  <li className="flex items-center">
+                    <Mail className="h-4 w-4 mr-2 text-purple-400" />
                     <span>info@zvezde365.com</span>
                   </li>
-                  <li className="flex items-start">
-                    <MapPin className="h-5 w-5 mr-2 text-purple-400 flex-shrink-0 mt-0.5" />
+                  <li className="flex items-center">
+                    <MapPin className="h-4 w-4 mr-2 text-purple-400" />
                     <span>Zvezdani put 365, Sazvežđe Oriona</span>
                   </li>
-                  <li className="flex items-start">
-                    <Clock className="h-5 w-5 mr-2 text-purple-400 flex-shrink-0 mt-0.5" />
+                  <li className="flex items-center">
+                    <Clock className="h-4 w-4 mr-2 text-purple-400" />
                     <span>Dostupni non-stop, 24/7/365</span>
                   </li>
                 </ul>
