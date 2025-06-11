@@ -195,7 +195,7 @@ const handler: Handler = async (event: HandlerEvent) => {
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'Zvezde365 <narudzbine@zvezde365.com>',
+      from: 'Zvezde365 <info@zvezde365.com>',
       to: toEmail || 'info@zvezde365.com',
       subject: emailSubject,
       html: emailHtml,
@@ -220,7 +220,7 @@ const handler: Handler = async (event: HandlerEvent) => {
     if (formType === 'newsletter') {
       try {
         await resend.emails.send({
-          from: 'Zvezde365 <newsletter@zvezde365.com>',
+          from: 'Zvezde365 <info@zvezde365.com>',
           to: formData.email,
           subject: 'Potvrda pretplate na zvezde365.com newsletter',
           html: `
