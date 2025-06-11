@@ -16,7 +16,12 @@ function Calendar({
   showOutsideDays = true,
   ...props
 }: CalendarProps) {
-  const [month, setMonth] = React.useState<Date>(props.selected || new Date())
+  const [month, setMonth] = React.useState<Date>(() => {
+    if (props.selected instanceof Date) {
+      return props.selected
+    }
+    return new Date()
+  })
   
   // Generate years from 1900 to current year
   const currentYear = new Date().getFullYear()
