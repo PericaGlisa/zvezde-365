@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
 
 export async function POST(req: Request) {
   try {
@@ -13,34 +14,62 @@ export async function POST(req: Request) {
       );
     }
 
-    // Call the Netlify function instead of using Resend directly
-    const response = await fetch('/.netlify/functions/send-email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        formData,
-        toEmail,
-        whatsappNumber
-      })
+    // Initialize Resend with API key from environment variable
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    
+    // Format birth time if it exists
+    const birthTime = formData.birthTime 
+      ? `${formData.birthTime.hour}:${formData.birthTime.minute}` 
+      : undefined;
+    
+    // Format birth date if it exists
+    let birthDateStr = formData.birthDate
+      ? (typeof formData.birthDate === 'string' 
+          ? formData.birthDate 
+          : new Date(formData.birthDate).toLocaleDateString('sr-RS'))
+      : undefined;
+    
+    // Create email content for natal chart order
+    const emailSubject = `Nova narudžbina natalne karte - ${formData.fullName}`;
+    
+    const emailHtml = `
+      <h1>Nova narudžbina natalne karte</h1>
+      <p><strong>Ime i prezime:</strong> ${formData.fullName}</p>
+      <p><strong>Email:</strong> ${formData.email}</p>
+      <p><strong>Telefon:</strong> ${formData.phone}</p>
+      <p><strong>Pol:</strong> ${
+        formData.gender === 'male' ? 'Muški' : 
+        formData.gender === 'female' ? 'Ženski' : 'Drugo'
+      }</p>
+      <p><strong>Datum rođenja:</strong> ${birthDateStr}</p>
+      <p><strong>Vreme rođenja:</strong> ${birthTime}</p>
+      <p><strong>Mesto rođenja:</strong> ${formData.birthPlace}</p>
+      <hr style="margin-top: 30px; margin-bottom: 20px; border: 0; border-top: 1px solid #eee;" />
+      <p style="color: #777; font-size: 14px;">Poslato sa: zvezde365.com</p>
+    `;
+
+    // Send email using Resend
+    const { data, error } = await resend.emails.send({
+      from: 'Zvezde365 <info@zvezde365.com>',
+      to: toEmail || 'info@zvezde365.com',
+      subject: emailSubject,
+      html: emailHtml,
+      cc: formData.email, // Send a copy to the customer
+      reply_to: formData.email // Add reply-to for easy response
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
+    if (error) {
+      console.error("Resend API error:", error);
       return NextResponse.json(
-        { error: errorData.error || 'Failed to send email' },
-        { status: response.status }
+        { error: 'Failed to send email', details: error.message },
+        { status: 500 }
       );
     }
-
-    const data = await response.json();
     
     return NextResponse.json({
       message: 'Form submitted successfully',
       emailSent: true,
-      emailId: data.emailId,
-      ...data
+      emailId: data?.id
     });
   } catch (error: any) {
     console.error('Function error:', error);
