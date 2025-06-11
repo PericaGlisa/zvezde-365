@@ -535,7 +535,6 @@ export default function NatalChartPage() {
                   <li>Personalizovanu interpretaciju svih planeta i kuća</li>
                   <li>Analizu ključnih aspekata i njihov uticaj na vaš život</li>
                   <li>PDF dokument sa vašim personalnim astrološkim profilom</li>
-                  <li>Prognozu za narednih 12 meseci</li>
                 </ul>
               </div>
               <p className="text-sm text-gray-400">
@@ -588,7 +587,7 @@ export default function NatalChartPage() {
                         <div>
                           <div className="text-xs text-purple-200 mb-1">primalac</div>
                           <div className="h-10 bg-gradient-to-r from-purple-100 to-purple-50 text-purple-900 p-2 rounded">
-                            Ivan Petković
+                            Zvezde 365
                           </div>
                         </div>
                       </div>
