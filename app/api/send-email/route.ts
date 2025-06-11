@@ -26,7 +26,13 @@ export async function POST(req: Request) {
     let birthDateStr = formData.birthDate
       ? (typeof formData.birthDate === 'string' 
           ? formData.birthDate 
-          : new Date(formData.birthDate).toLocaleDateString('sr-RS'))
+          : (() => {
+              const date = new Date(formData.birthDate);
+              const day = date.getDate().toString().padStart(2, '0');
+              const month = (date.getMonth() + 1).toString().padStart(2, '0');
+              const year = date.getFullYear();
+              return `${day}.${month}.${year}.`;
+            })())
       : undefined;
     
     // Create email content for natal chart order
@@ -44,6 +50,7 @@ export async function POST(req: Request) {
       <p><strong>Datum rođenja:</strong> ${birthDateStr}</p>
       <p><strong>Vreme rođenja:</strong> ${birthTime}</p>
       <p><strong>Mesto rođenja:</strong> ${formData.birthPlace}</p>
+      ${formData.notes ? `<p><strong>Napomena:</strong> ${formData.notes}</p>` : ''}
       <hr style="margin-top: 30px; margin-bottom: 20px; border: 0; border-top: 1px solid #eee;" />
       <p style="color: #777; font-size: 14px;">Poslato sa: zvezde365.com</p>
     `;
