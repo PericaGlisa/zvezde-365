@@ -24,15 +24,13 @@ export async function POST(req: Request) {
     
     // Format birth date if it exists
     let birthDateStr = formData.birthDate
-      ? (typeof formData.birthDate === 'string' 
-          ? formData.birthDate 
-          : (() => {
-              const date = new Date(formData.birthDate);
-              const day = date.getDate().toString().padStart(2, '0');
-              const month = (date.getMonth() + 1).toString().padStart(2, '0');
-              const year = date.getFullYear();
-              return `${day}.${month}.${year}.`;
-            })())
+      ? (() => {
+          const date = new Date(formData.birthDate);
+          const day = date.getDate().toString().padStart(2, '0');
+          const month = (date.getMonth() + 1).toString().padStart(2, '0');
+          const year = date.getFullYear();
+          return `${day}.${month}.${year}.`;
+        })()
       : undefined;
     
     // Create email content for natal chart order
