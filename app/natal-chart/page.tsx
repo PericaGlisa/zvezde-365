@@ -74,6 +74,7 @@ const formSchema = z.object({
   birthPlace: z.string().min(2, {
     message: "Mesto rođenja mora imati najmanje 2 karaktera.",
   }),
+  notes: z.string().optional(),
 });
 
 export default function NatalChartPage() {
@@ -360,52 +361,32 @@ export default function NatalChartPage() {
                     render={({ field }) => (
                       <FormItem className="flex flex-col">
                         <FormLabel className="text-white text-sm sm:text-base">Datum rođenja</FormLabel>
-                        <div className="flex gap-2">
-                          <Input
-                            type="text"
-                            placeholder="DD.MM.YYYY"
-                            value={field.value ? formatYugoslavDate(field.value) : ""}
-                            onChange={(e) => {
-                              const value = e.target.value;
-                              // Parse DD.MM.YYYY format
-                              const dateRegex = /^(\d{1,2})\.(\d{1,2})\.(\d{4})\.?$/;
-                              const match = value.match(dateRegex);
-                              if (match) {
-                                const [, day, month, year] = match;
-                                const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-                                if (!isNaN(date.getTime()) && date >= new Date("1900-01-01") && date <= new Date()) {
-                                  field.onChange(date);
-                                }
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button
+                              type="button"
+                              variant={"outline"}
+                              className="w-full justify-start text-left font-normal bg-gray-700 border-gray-600 text-white h-10 sm:h-11"
+                            >
+                              <CalendarIcon className="mr-2 h-4 w-4" />
+                              {field.value ? formatYugoslavDate(field.value) : "Izaberite datum"}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0 bg-gray-700 border-gray-600" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={field.onChange}
+                              disabled={(date) =>
+                                date > new Date() || date < new Date("1900-01-01")
                               }
-                            }}
-                            className="bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11 flex-1"
-                          />
-                          <Popover>
-                            <PopoverTrigger asChild>
-                              <Button
-                                type="button"
-                                variant={"outline"}
-                                className="bg-gray-700 border-gray-600 text-white h-10 sm:h-11 px-3"
-                              >
-                                <CalendarIcon className="h-4 w-4" />
-                              </Button>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-auto p-0 bg-gray-700 border-gray-600" align="start">
-                              <Calendar
-                                mode="single"
-                                selected={field.value}
-                                onSelect={field.onChange}
-                                disabled={(date) =>
-                                  date > new Date() || date < new Date("1900-01-01")
-                                }
-                                initialFocus
-                                className="bg-gray-700 text-white"
-                              />
-                            </PopoverContent>
-                          </Popover>
-                        </div>
+                              initialFocus
+                              className="bg-gray-700 text-white"
+                            />
+                          </PopoverContent>
+                        </Popover>
                         <FormDescription className="text-gray-400 text-xs sm:text-sm">
-                          Unesite datum u formatu DD.MM.YYYY ili koristite kalendar
+                          Kliknite na dugme da izaberete datum rođenja
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -417,23 +398,21 @@ export default function NatalChartPage() {
                     control={form.control}
                     name="birthTime"
                     render={({ field }) => (
-                      <FormItem>
+                      <FormItem className="flex flex-col">
                         <FormLabel className="text-white text-sm sm:text-base">Vreme rođenja <span className="text-red-400">*</span></FormLabel>
                         <Popover>
                           <PopoverTrigger asChild>
-                            <FormControl>
-                              <Button
-                                variant={"outline"}
-                                className="pl-3 text-left font-normal bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11 w-full flex justify-between"
-                              >
-                                <span>
-                                  {field.value ? 
-                                    formatBirthTime(field.value) : 
-                                    "Izaberite vreme"}
-                                </span>
-                                <Clock className="h-4 w-4 opacity-50" />
-                              </Button>
-                            </FormControl>
+                            <Button
+                              type="button"
+                              variant={"outline"}
+                              className={cn(
+                                "w-full justify-start text-left font-normal bg-gray-700 border-gray-600 text-white h-10 sm:h-11",
+                                !field.value && "text-gray-400"
+                              )}
+                            >
+                              <Clock className="mr-2 h-4 w-4" />
+                              {field.value ? formatBirthTime(field.value) : "Izaberite vreme"}
+                            </Button>
                           </PopoverTrigger>
                           <PopoverContent className="w-auto p-4 bg-gray-700 border-gray-600" align="start">
                             <div className="grid gap-4">
@@ -486,8 +465,8 @@ export default function NatalChartPage() {
                             </div>
                           </PopoverContent>
                         </Popover>
-                        <FormDescription className="text-gray-400">
-                          Format: 24-časovni (npr. 14:30)
+                        <FormDescription className="text-gray-400 text-xs sm:text-sm">
+                          Kliknite na dugme da izaberete vreme rođenja
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -508,6 +487,29 @@ export default function NatalChartPage() {
                             className="bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11"
                           />
                         </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Notes */}
+                  <FormField
+                    control={form.control}
+                    name="notes"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white text-sm sm:text-base">Napomena</FormLabel>
+                        <FormControl>
+                          <textarea
+                            placeholder="Dodatne informacije ili posebni zahtevi (opciono)"
+                            {...field}
+                            className="bg-gray-700 border-gray-600 text-white text-sm sm:text-base min-h-[80px] w-full rounded-md border px-3 py-2 placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent resize-vertical"
+                            rows={3}
+                          />
+                        </FormControl>
+                        <FormDescription className="text-gray-400 text-xs sm:text-sm">
+                          Ovde možete uneti dodatne informacije koje smatrate važnim za vašu natalnu kartu
+                        </FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
