@@ -1,4 +1,4 @@
-import { Handler, HandlerEvent } from "@netlify/functions";
+import { Handler, HandlerEvent } from '@netlify/functions';
 import { Resend } from 'resend';
 
 interface BirthTimeInfo {
