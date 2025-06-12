@@ -5,13 +5,11 @@ import Link from 'next/link';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { format } from 'date-fns';
-import { CalendarIcon, Star, CreditCard, Download, Bitcoin, Check, Copy, Clock } from "lucide-react";
+import { Star, CreditCard, Download, Bitcoin, Check, Copy } from "lucide-react";
 import { toPng } from 'html-to-image';
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
@@ -29,11 +27,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import {
   Card,
   CardContent,
@@ -58,18 +51,46 @@ const formSchema = z.object({
   gender: z.string({
     required_error: "Molimo izaberite pol.",
   }),
-  birthDate: z.date({
-    required_error: "Datum rođenja je obavezan.",
-  }),
-  birthTime: z.object({
-    hour: z.string({
-      required_error: "Sat rođenja je obavezan.",
-    }),
-    minute: z.string({
-      required_error: "Minut rođenja je obavezan.",
-    }),
+  birthDay: z.string().min(1, {
+    message: "Dan rođenja je obavezan.",
+  }).refine((val) => {
+    const day = parseInt(val);
+    return day >= 1 && day <= 31;
   }, {
-    required_error: "Vreme rođenja je obavezno.",
+    message: "Dan mora biti između 1 i 31.",
+  }),
+  birthMonth: z.string().min(1, {
+    message: "Mesec rođenja je obavezan.",
+  }).refine((val) => {
+    const month = parseInt(val);
+    return month >= 1 && month <= 12;
+  }, {
+    message: "Mesec mora biti između 1 i 12.",
+  }),
+  birthYear: z.string().min(4, {
+    message: "Godina rođenja je obavezna.",
+  }).refine((val) => {
+    const year = parseInt(val);
+    const currentYear = new Date().getFullYear();
+    return year >= 1900 && year <= currentYear;
+  }, {
+    message: "Godina mora biti između 1900 i trenutne godine.",
+  }),
+  birthHour: z.string().min(1, {
+    message: "Sat rođenja je obavezan.",
+  }).refine((val) => {
+    const hour = parseInt(val);
+    return hour >= 0 && hour <= 23;
+  }, {
+    message: "Sat mora biti između 0 i 23.",
+  }),
+  birthMinute: z.string().min(1, {
+    message: "Minut rođenja je obavezan.",
+  }).refine((val) => {
+    const minute = parseInt(val);
+    return minute >= 0 && minute <= 59;
+  }, {
+    message: "Minut mora biti između 0 i 59.",
   }),
   birthPlace: z.string().min(2, {
     message: "Mesto rođenja mora imati najmanje 2 karaktera.",
@@ -99,11 +120,10 @@ export default function NatalChartPage() {
       email: "",
       phone: "",
       gender: "",
-      birthTime: {
-        hour: "12",
-        minute: "00",
-      },
+      birthHour: "",
+      birthMinute: "",
       birthPlace: "",
+      notes: "",
     },
   });
 
@@ -116,8 +136,9 @@ export default function NatalChartPage() {
   };
 
   // Format birth time for display
-  const formatBirthTime = (timeObj: { hour: string; minute: string }) => {
-    return `${timeObj.hour}:${timeObj.minute}`;
+  const formatBirthTime = (hour: string, minute: string) => {
+    if (!hour || !minute) return "";
+    return `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`;
   };
 
   // Function to send form data to email
@@ -140,9 +161,19 @@ export default function NatalChartPage() {
       // Get form values
       const values = form.getValues();
       
+      // Construct formatted birth date from separate fields
+      const birthDateFormatted = `${values.birthDay.padStart(2, '0')}.${values.birthMonth.padStart(2, '0')}.${values.birthYear}.`;
+      
+      // Construct formatted birth time from separate fields
+      const birthTimeFormatted = formatBirthTime(values.birthHour, values.birthMinute);
+      
       // Prepare the data to send to the API
       const requestData = {
-        formData: values,
+        formData: {
+          ...values,
+          birthDate: birthDateFormatted, // Send formatted date string instead of separate fields
+          birthTime: birthTimeFormatted // Send formatted time string instead of separate fields
+        },
         toEmail: "info@zvezde365.com",
         whatsappNumber: "+381XX123456" // Optional WhatsApp number
       };
@@ -233,11 +264,6 @@ export default function NatalChartPage() {
         console.error('Greška prilikom kopiranja adrese', err);
         toast.error("Greška prilikom kopiranja adrese. Pokušajte ponovo.");
       });
-  };
-  
-  // Format date in Yugoslav style (DD.MM.YYYY)
-  const formatYugoslavDate = (date: Date) => {
-    return format(date, "dd.MM.yyyy.");
   };
 
   return (
@@ -355,123 +381,119 @@ export default function NatalChartPage() {
                   />
 
                   {/* Birth Date */}
-                  <FormField
-                    control={form.control}
-                    name="birthDate"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col">
-                        <FormLabel className="text-white text-sm sm:text-base">Datum rođenja</FormLabel>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <Button
-                              type="button"
-                              variant={"outline"}
-                              className="w-full justify-start text-left font-normal bg-gray-700 border-gray-600 text-white h-10 sm:h-11"
-                            >
-                              <CalendarIcon className="mr-2 h-4 w-4" />
-                              {field.value ? formatYugoslavDate(field.value) : "Izaberite datum"}
-                            </Button>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-auto p-0 bg-gray-700 border-gray-600" align="start">
-                            <Calendar
-                              mode="single"
-                              selected={field.value}
-                              onSelect={field.onChange}
-                              disabled={(date) =>
-                                date > new Date() || date < new Date("1900-01-01")
-                              }
-                              initialFocus
-                              className="bg-gray-700 text-white"
-                            />
-                          </PopoverContent>
-                        </Popover>
-                        <FormDescription className="text-gray-400 text-xs sm:text-sm">
-                          Kliknite na dugme da izaberete datum rođenja
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  <div className="space-y-2">
+                    <FormLabel className="text-white text-sm sm:text-base">Datum rođenja</FormLabel>
+                    <div className="grid grid-cols-3 gap-2">
+                      <FormField
+                        control={form.control}
+                        name="birthDay"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input
+                                placeholder="Dan"
+                                {...field}
+                                className="bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11"
+                                type="number"
+                                min="1"
+                                max="31"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="birthMonth"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input
+                                placeholder="Mesec"
+                                {...field}
+                                className="bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11"
+                                type="number"
+                                min="1"
+                                max="12"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="birthYear"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input
+                                placeholder="Godina"
+                                {...field}
+                                className="bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11"
+                                type="number"
+                                min="1900"
+                                max={new Date().getFullYear()}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                    <FormDescription className="text-gray-400 text-xs sm:text-sm">
+                      Unesite dan, mesec i godinu rođenja
+                    </FormDescription>
+                  </div>
 
                   {/* Birth Time */}
-                  <FormField
-                    control={form.control}
-                    name="birthTime"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col">
-                        <FormLabel className="text-white text-sm sm:text-base">Vreme rođenja <span className="text-red-400">*</span></FormLabel>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <Button
-                              type="button"
-                              variant={"outline"}
-                              className={cn(
-                                "w-full justify-start text-left font-normal bg-gray-700 border-gray-600 text-white h-10 sm:h-11",
-                                !field.value && "text-gray-400"
-                              )}
-                            >
-                              <Clock className="mr-2 h-4 w-4" />
-                              {field.value ? formatBirthTime(field.value) : "Izaberite vreme"}
-                            </Button>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-auto p-4 bg-gray-700 border-gray-600" align="start">
-                            <div className="grid gap-4">
-                              <div className="grid grid-cols-2 gap-2">
-                                <div className="flex flex-col">
-                                  <FormLabel className="text-xs text-gray-400 mb-1">Sat</FormLabel>
-                                  <Select
-                                    value={form.watch("birthTime.hour")}
-                                    onValueChange={(value) => form.setValue("birthTime.hour", value)}
-                                  >
-                                    <SelectTrigger className="bg-gray-800 border-gray-600 text-white">
-                                      <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent className="bg-gray-800 border-gray-600">
-                                      {Array.from({ length: 24 }, (_, i) => i).map((hour) => (
-                                        <SelectItem 
-                                          key={hour} 
-                                          value={String(hour).padStart(2, '0')} 
-                                          className="text-white"
-                                        >
-                                          {String(hour).padStart(2, '0')}
-                                        </SelectItem>
-                                      ))}
-                                    </SelectContent>
-                                  </Select>
-                                </div>
-                                <div className="flex flex-col">
-                                  <FormLabel className="text-xs text-gray-400 mb-1">Minut</FormLabel>
-                                  <Select
-                                    value={form.watch("birthTime.minute")}
-                                    onValueChange={(value) => form.setValue("birthTime.minute", value)}
-                                  >
-                                    <SelectTrigger className="bg-gray-800 border-gray-600 text-white">
-                                      <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent className="bg-gray-800 border-gray-600">
-                                      {Array.from({ length: 12 }, (_, i) => i * 5).map((minute) => (
-                                        <SelectItem 
-                                          key={minute} 
-                                          value={minute.toString().padStart(2, '0')} 
-                                          className="text-white"
-                                        >
-                                          {minute.toString().padStart(2, '0')}
-                                        </SelectItem>
-                                      ))}
-                                    </SelectContent>
-                                  </Select>
-                                </div>
-                              </div>
-                            </div>
-                          </PopoverContent>
-                        </Popover>
-                        <FormDescription className="text-gray-400 text-xs sm:text-sm">
-                          Kliknite na dugme da izaberete vreme rođenja
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  <div className="space-y-2">
+                    <FormLabel className="text-white text-sm sm:text-base">Vreme rođenja</FormLabel>
+                    <div className="grid grid-cols-2 gap-2">
+                      <FormField
+                        control={form.control}
+                        name="birthHour"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input
+                                placeholder="Sat"
+                                {...field}
+                                className="bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11"
+                                type="number"
+                                min="0"
+                                max="23"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="birthMinute"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input
+                                placeholder="Minut"
+                                {...field}
+                                className="bg-gray-700 border-gray-600 text-white text-sm sm:text-base h-10 sm:h-11"
+                                type="number"
+                                min="0"
+                                max="59"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                    <FormDescription className="text-gray-400 text-xs sm:text-sm">
+                      Unesite sat i minut rođenja
+                    </FormDescription>
+                  </div>
 
                   {/* Birth Place */}
                   <FormField

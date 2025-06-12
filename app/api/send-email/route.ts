@@ -17,21 +17,11 @@ export async function POST(req: Request) {
     // Initialize Resend with API key from environment variable
     const resend = new Resend(process.env.RESEND_API_KEY);
     
-    // Format birth time if it exists
-    const birthTime = formData.birthTime 
-      ? `${formData.birthTime.hour}:${formData.birthTime.minute}` 
-      : undefined;
+    // Use the already formatted birth time string
+    const birthTime = formData.birthTime || undefined;
     
-    // Format birth date if it exists
-    let birthDateStr = formData.birthDate
-      ? (() => {
-          const date = new Date(formData.birthDate);
-          const day = date.getDate().toString().padStart(2, '0');
-          const month = (date.getMonth() + 1).toString().padStart(2, '0');
-          const year = date.getFullYear();
-          return `${day}.${month}.${year}.`;
-        })()
-      : undefined;
+    // Use the already formatted birth date string
+    const birthDateStr = formData.birthDate || undefined;
     
     // Create email content for natal chart order
     const emailSubject = `Nova narudžbina natalne karte - ${formData.fullName}`;
