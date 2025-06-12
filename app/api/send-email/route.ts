@@ -14,6 +14,11 @@ export async function POST(req: Request) {
       );
     }
 
+    // Debug: Log received form data
+    console.log('Received form data:', formData);
+    console.log('Birth time value:', formData.birthTime);
+    console.log('Notes value:', formData.notes);
+    
     // Initialize Resend with API key from environment variable
     const resend = new Resend(process.env.RESEND_API_KEY);
     
@@ -36,7 +41,7 @@ export async function POST(req: Request) {
         formData.gender === 'female' ? 'Ženski' : 'Drugo'
       }</p>
       <p><strong>Datum rođenja:</strong> ${birthDateStr}</p>
-      <p><strong>Vreme rođenja:</strong> ${birthTime}</p>
+      ${birthTime ? `<p><strong>Vreme rođenja:</strong> ${birthTime}</p>` : ''}
       <p><strong>Mesto rođenja:</strong> ${formData.birthPlace}</p>
       ${formData.notes ? `<p><strong>Napomena:</strong> ${formData.notes}</p>` : ''}
       <hr style="margin-top: 30px; margin-bottom: 20px; border: 0; border-top: 1px solid #eee;" />

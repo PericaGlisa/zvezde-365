@@ -167,6 +167,11 @@ export default function NatalChartPage() {
       // Construct formatted birth time from separate fields
       const birthTimeFormatted = formatBirthTime(values.birthHour, values.birthMinute);
       
+      // Debug: Log form values
+      console.log('Form values:', values);
+      console.log('Birth time formatted:', birthTimeFormatted);
+      console.log('Notes field:', values.notes);
+      
       // Prepare the data to send to the API
       const requestData = {
         formData: {
@@ -177,6 +182,8 @@ export default function NatalChartPage() {
         toEmail: "info@zvezde365.com",
         whatsappNumber: "+381XX123456" // Optional WhatsApp number
       };
+      
+      console.log('Request data:', requestData);
       
       // Call the API
       const response = await fetch("/api/send-email", {
