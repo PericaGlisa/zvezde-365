@@ -76,19 +76,17 @@ const formSchema = z.object({
   }, {
     message: "Godina mora biti između 1900 i trenutne godine.",
   }),
-  birthHour: z.string().min(1, {
-    message: "Sat rođenja je obavezan.",
-  }).refine((val) => {
+  birthHour: z.string().refine((val) => {
+    if (val === "") return false; // Empty is not allowed
     const hour = parseInt(val);
-    return hour >= 0 && hour <= 23;
+    return !isNaN(hour) && hour >= 0 && hour <= 23;
   }, {
     message: "Sat mora biti između 0 i 23.",
   }),
-  birthMinute: z.string().min(1, {
-    message: "Minut rođenja je obavezan.",
-  }).refine((val) => {
+  birthMinute: z.string().refine((val) => {
+    if (val === "") return false; // Empty is not allowed
     const minute = parseInt(val);
-    return minute >= 0 && minute <= 59;
+    return !isNaN(minute) && minute >= 0 && minute <= 59;
   }, {
     message: "Minut mora biti između 0 i 59.",
   }),
@@ -137,7 +135,7 @@ export default function NatalChartPage() {
 
   // Format birth time for display
   const formatBirthTime = (hour: string, minute: string) => {
-    if (!hour || !minute) return "";
+    if (hour === "" || minute === "") return "";
     return `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`;
   };
 
